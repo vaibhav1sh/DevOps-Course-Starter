@@ -50,3 +50,8 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Running through VM
+During VM provisioning, all the dependencies are installed. Provisioning steps are documented in vagrantfile.
+
+Once VM is brought up (using the command $ vagrant up), visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
