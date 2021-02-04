@@ -57,10 +57,14 @@ During VM provisioning, all the dependencies are installed. Provisioning steps a
 Once VM is brought up (using the command $ vagrant up), visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
 ## Notes for Module-5
-For Part-1 of exercise, execute following command to create container - 
+For Part-1 of exercise, execute following commands to build docker image and create container -
+ to create container - 
+    docker build --tag todo-app .
     docker run -p 5000:5000 --env-file .env todo-app gunicorn --bind 0.0.0.0:5000 todo_app.app:app
 For Part-2 (multi-stage build file), following are the commands - 
 Development Image:
+    docker build --target development --tag todo-app:dev .
     docker run --env-file .env -p 5100:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
 Production Image:
+    docker build --target production --tag todo-app:prod .
     docker run --env-file .env -p 5100:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:prod

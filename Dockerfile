@@ -21,7 +21,7 @@ RUN poetry install
     FROM base as production
     RUN pip install gunicorn
     EXPOSE 5000
-#    COPY todo_app todo_app - no more copying the code.
+    COPY todo_app todo_app 
     ENTRYPOINT [ "gunicorn","--bind","0.0.0.0:5000","todo_app.app:app"]
 
 # DEV IMAGE
