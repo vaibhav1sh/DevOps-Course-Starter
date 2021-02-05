@@ -52,7 +52,7 @@ You should see output similar to the following:
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
 ## Module -2 
-This enhancement connects the app with Trello to fetch and update to-do items. The application can - 
+This enhancement connects the app with Trello to fetch and update to-do items. The application can -   
 
 
     * Fetch all cards from one or more lists (To Do, Doing, Done, etc.). Default pull is from all lists, can be changed by passing list names to `fetch_all_items` method.
