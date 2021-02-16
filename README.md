@@ -59,9 +59,9 @@ This enhancement connects the app with Trello to fetch and update to-do items. T
     * Create a new card, by letting the user choose list name and title of the card.
     * Update status of card to Done. The update method can be changed to move card to other list by changing second parm of method `change_card_status`   
 
-To run the app, execute the following command - 
-```bash
-$ poetry run flask run
-```
+
+The `.env` file has four new variables. Two of these are for Trello API key and token. 
+The other two variables store User Name (to fetch boards for given user) and Board Name (to fetch cards from the given board). 
+
 
 Visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.  
