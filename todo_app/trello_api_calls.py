@@ -1,6 +1,6 @@
 import os, requests
 
-class Item:
+class TrelloCard:
     def __init__(self,title,id,status):
         self.title = title
         self.status = status
@@ -14,7 +14,7 @@ class Item:
         card_title = {"name": title}
         api_response = requests.post(url, params=payload, data = card_title)
         api_response_list = api_response.json()
-        return Item(api_response_list["name"],api_response_list["id"], list_category)
+        return TrelloCard(api_response_list["name"],api_response_list["id"], list_category)
 
 api_prefix = 'https://api.trello.com/'
 
@@ -42,14 +42,14 @@ def get_list_id(list_category):
             list_id = x["id"]
     return list_id
 
-def fetch_all_items(*args): 
+def fetch_all_cards(*args): 
     all_cards_obj = []
     for arg in args:
         list_id = get_list_id(arg)
         api_suffix_get_lists = '1/lists/' + list_id + '/cards'
         all_cards = call_api(api_suffix_get_lists)
         for i, card in enumerate(all_cards):
-            all_cards[i] = Item(all_cards[i]["name"], all_cards[i]["id"], arg)
+            all_cards[i] = TrelloCard(all_cards[i]["name"], all_cards[i]["id"], arg)
         all_cards_obj.extend(all_cards)
     return all_cards_obj
 

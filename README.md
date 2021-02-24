@@ -65,3 +65,7 @@ The other two variables store User Name (to fetch boards for given user) and Boa
 
 
 Visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.  
+
+## Module 3
+Nomenclature has been enhanced.  We now have objects of class TrelloCard instead of todos or items.
+added dependency pytest-dotenv
