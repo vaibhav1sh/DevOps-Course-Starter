@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect
 
 from todo_app.flask_config import Config
 
-from todo_app.trello_api_calls import fetch_all_cards, change_card_status, TrelloCard
+from todo_app.trello_api_calls import fetch_all_cards, change_card_status, \
+    TrelloCard
 from todo_app.view_model import ViewModel
 import requests, os, json
 
@@ -13,8 +14,10 @@ app.config.from_object(Config)
 def index():
     cards = fetch_all_cards("To Do", "Doing", "Done")  
     view_model_obj = ViewModel(cards) 
-    return render_template('index.html', todo_cards = view_model_obj.get_cards('To Do'),  \
-    doing_cards = view_model_obj.get_cards('Doing'), done_cards = view_model_obj.get_cards('Done'))
+    return render_template('index.html', \
+        todo_cards = view_model_obj.get_cards('To Do'), \
+            doing_cards = view_model_obj.get_cards('Doing'), \
+                done_cards = view_model_obj.return_all_done_cards(5))
 
 @app.route('/add-card', methods = ["POST"])
 def add_item():
