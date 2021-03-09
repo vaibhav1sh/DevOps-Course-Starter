@@ -43,6 +43,44 @@
       </ul>
       <!-- Segment 3 - Done cards here -->
       <h5>Done Cards</h5>
+      {% if done_cards[0] == False %}
+      <details>
+        <summary>
+        <h6><b>Cards completed today</b></h6>  
+        <ul class="list-group mb-4">
+        {% for card in done_cards[2] %}
+          <li>
+            <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
+            <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
+              <input type = "hidden" name = card_id_form value = {{card.id}}>
+                <button type="submit">
+                Mark As Complete
+                </button>
+            </form>
+          </li>
+        {% endfor %}
+        </ul>
+        </summary>
+        <div>
+          <ul class="list-group mb-4">
+          {% for card in done_cards[3] %}
+            <li>
+              <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
+              <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
+                <input type = "hidden" name = card_id_form value = {{card.id}}>
+                  <button type="submit">
+                  Mark As Complete
+                  </button>
+              </form>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+      </details>
+
+
+      <!-- Below triggers for less than 5 cards -->
+      {% else %}
       <ul class="list-group mb-4">
         {% for card in done_cards[1] %}
           <li>
@@ -56,6 +94,7 @@
           </li>
         {% endfor %}
       </ul>
+      {% endif %}
     </div>
   </div>
 

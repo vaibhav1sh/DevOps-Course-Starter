@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect
 from todo_app.flask_config import Config
 
 from todo_app.trello_api_calls import fetch_all_cards, change_card_status, \
-    TrelloCard
+TrelloCard
 from todo_app.view_model import ViewModel
 import requests, os, json
 
