@@ -51,6 +51,22 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
+
+## Module -2 
+This enhancement connects the app with Trello to fetch and update to-do items. The application can -   
+
+
+    * Fetch all cards from one or more lists (To Do, Doing, Done, etc.). Default pull is from all lists, can be changed by passing list names to `fetch_all_items` method.
+    * Create a new card, by letting the user choose list name and title of the card.
+    * Update status of card to Done. The update method can be changed to move card to other list by changing second parm of method `change_card_status`   
+
+
+The `.env` file has four new variables. Two of these are for Trello API key and token. 
+The other two variables store User Name (to fetch boards for given user) and Board Name (to fetch cards from the given board). 
+
+
+Visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.  
+
 ## Running through VM
 During VM provisioning, all the dependencies are installed. Provisioning steps are documented in vagrantfile.
 
