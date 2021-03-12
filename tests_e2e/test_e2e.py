@@ -53,6 +53,3 @@ def test_mark_card_complete(driver, test_app):
     one_done_card = fetch_all_cards("Done")
     assert len(one_done_card) == 1
     assert one_done_card[0].title == "Creating new card"    
-#     assert "Done" in str(((driver.find_element_by_xpath(
-#         "/html/body/div/div[2]/div/details/summary/ul/li"
-#     )))) 
