@@ -51,6 +51,7 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
+
 ## Module -2 
 This enhancement connects the app with Trello to fetch and update to-do items. The application can -   
 
@@ -65,3 +66,9 @@ The other two variables store User Name (to fetch boards for given user) and Boa
 
 
 Visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.  
+
+## Running through VM
+During VM provisioning, all the dependencies are installed. Provisioning steps are documented in vagrantfile.
+
+Once VM is brought up (using the command $ vagrant up), visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
