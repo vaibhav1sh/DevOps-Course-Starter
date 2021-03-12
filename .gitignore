@@ -119,5 +119,10 @@ env/
 ### Configuration files ###
 .env
 
+
+### VisualStudioCode ###
+.vscode
+
 # Vagrant #
 .vagrant/
+

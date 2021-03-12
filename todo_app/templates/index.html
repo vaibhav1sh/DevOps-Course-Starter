@@ -3,17 +3,25 @@
 
 {% block content %}
   <div class="jumbotron">
-    <h1 class="display-4">To-Do App</h1>
+    <h1 class=  "display-4">To-Do App</h1>
     <p class="lead">Just another to-do app.</p>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
+      <h2>List of To Do Items</h2>
       <ul class="list-group mb-4">
         <!-- List the todo items here -->
         {% for todo in todos %}
-          <li>{{todo.id}} - {{todo.title}} - {{todo.status}}</li>
+          <li>
+            <b>Card # {{loop.index}}</b> : {{todo.title}} - <i>{{todo.status}}</i> 
+            <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
+              <input type = "hidden" name = todo_id value = {{todo.id}}>
+                <button type="submit">
+                Mark As Complete
+                </button>
+            </form>
+          </li>
         {% endfor %}
       </ul>
     </div>
@@ -24,8 +32,18 @@
       <h2>Add New Items</h2>
       <form action="/add-item" method="POST">
         <ul class="list-group mb-4">
-          <li><label for ="title">Title : </label></li>
+          <li>
+            <label for ="title">Title : </label>
+          </li>
           <input type="text" id="title" name="title_of_todo">
+          <li>
+            <label for ="status">Choose a Status : </label>
+          </li>
+          <select name = "status_of_todo" id="status">
+            <option value = "To Do">To Do</option>  
+            <option value = "Doing">Doing</option>
+            <option value = "Done">Done</option>
+          </select>
           <li class="button">
             <button type="submit">Add new todo</button>
           </li>
