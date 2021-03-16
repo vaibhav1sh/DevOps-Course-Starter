@@ -22,7 +22,15 @@ def call_api(api_suffix):
     payload = {'fields':'name','key':os.environ.get('TRELLO_KEY'),'token':os.environ.get('TRELLO_TOKEN')}
     url = api_prefix + api_suffix
     api_response = requests.get(url, params=payload)
-    api_response_list = api_response.json()
+    try:
+        assert len(api_response.json()) != 0
+    except:
+        print('API response is null')
+        print('Trello API return code', api_response.status_code)
+        print('Trello API request url',url)
+        print('Trello API payload', payload)
+    else:
+        api_response_list = api_response.json()
     return api_response_list
 
 def get_board_id():

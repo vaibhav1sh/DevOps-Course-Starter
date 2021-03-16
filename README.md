@@ -52,13 +52,11 @@ You should see output similar to the following:
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
 
-## Module -2 
+## **Module-2**
 This enhancement connects the app with Trello to fetch and update to-do items. The application can -   
-
-
-    * Fetch all cards from one or more lists (To Do, Doing, Done, etc.). Default pull is from all lists, can be changed by passing list names to `fetch_all_items` method.
-    * Create a new card, by letting the user choose list name and title of the card.
-    * Update status of card to Done. The update method can be changed to move card to other list by changing second parm of method `change_card_status`   
+- Fetch all cards from one or more lists (To Do, Doing, Done, etc.). Default pull is from all lists, can be changed by passing list names to `fetch_all_items` method.
+- Create a new card, by letting the user choose list name and title of the card.
+- Update status of card to Done. The update method can be changed to move card to other list by changing second parm of method `change_card_status`   
 
 
 The `.env` file has four new variables. Two of these are for Trello API key and token. 
@@ -72,15 +70,25 @@ During VM provisioning, all the dependencies are installed. Provisioning steps a
 
 Once VM is brought up (using the command $ vagrant up), visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
-## Notes for Module-5
-For Part-1 of exercise, execute following commands to build docker image and create container -
- to create container - 
-    docker build --tag todo-app .
-    docker run -p 5000:5000 --env-file .env todo-app gunicorn --bind 0.0.0.0:5000 todo_app.app:app
+## **Module-5**
+For Part-1 of exercise, execute following commands to build docker image and create container:  
+```
+$ docker build --tag todo-app . 
+$ docker run -p 5000:5000 --env-file .env todo-app gunicorn --bind 0.0.0.0:5000 todo_app.app:app
+```
+
 For Part-2 (multi-stage build file), following are the commands - 
+
 Development Image:
-    docker build --target development --tag todo-app:dev .
-    docker run --env-file .env -p 5100:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
-Production Image:
-    docker build --target production --tag todo-app:prod .
-    docker run --env-file .env -p 5100:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:prod
+    
+```bash
+$ docker build --target development --tag todo-app:dev .
+$ docker run --env-file .env -p 5100:5100 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
+```
+
+Production Image: (application is copied to image as well, hence no need to use bind mount)
+
+```bash
+$ docker build --target production --tag todo-app:prod .
+$ docker run --env-file .env -p 5000:5000 todo-app:prod
+```
