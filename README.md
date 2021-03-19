@@ -83,7 +83,7 @@ Development Image:
     
 ```bash
 $ docker build --target development --tag todo-app:dev .
-$ docker run --env-file .env -p 5100:5100 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
+$ docker run --env-file .env -p 5100:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
 ```
 
 Production Image: (application is copied to image as well, hence no need to use bind mount)
