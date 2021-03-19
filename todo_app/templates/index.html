@@ -9,14 +9,15 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2>List of To Do Items</h2>
+      <h2>List of Trello Cards</h2>
+      <!-- Segment 1 - todo cards here -->
+      <h5>To Do Cards</h5>
       <ul class="list-group mb-4">
-        <!-- List the todo items here -->
-        {% for todo in todos %}
+        {% for card in todo_cards %}
           <li>
-            <b>Card # {{loop.index}}</b> : {{todo.title}} - <i>{{todo.status}}</i> 
+            <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
             <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
-              <input type = "hidden" name = todo_id value = {{todo.id}}>
+              <input type = "hidden" name = card_id_form value = {{card.id}}>
                 <button type="submit">
                 Mark As Complete
                 </button>
@@ -24,13 +25,83 @@
           </li>
         {% endfor %}
       </ul>
+      
+      <!-- Segment 2 - Doing cards here -->
+      <h5>Doing Cards</h5>
+      <ul class="list-group mb-4">
+        {% for card in doing_cards %}
+          <li>
+            <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
+            <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
+              <input type = "hidden" name = card_id_form value = {{card.id}}>
+                <button type="submit">
+                Mark As Complete
+                </button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+      <!-- Segment 3 - Done cards here -->
+      <h5>Done Cards</h5>
+      {% if done_cards[0] == False %}
+      <details>
+        <summary>
+        <h6><b>Cards completed today</b></h6>  
+        <ul class="list-group mb-4">
+        {% for card in done_cards[2] %}
+          <li>
+            <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
+            <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
+              <input type = "hidden" name = card_id_form value = {{card.id}}>
+                <button type="submit">
+                Mark As Complete
+                </button>
+            </form>
+          </li>
+        {% endfor %}
+        </ul>
+        </summary>
+        <div>
+          <ul class="list-group mb-4">
+          {% for card in done_cards[3] %}
+            <li>
+              <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
+              <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
+                <input type = "hidden" name = card_id_form value = {{card.id}}>
+                  <button type="submit">
+                  Mark As Complete
+                  </button>
+              </form>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+      </details>
+
+
+      <!-- Below triggers for less than 5 cards -->
+      {% else %}
+      <ul class="list-group mb-4">
+        {% for card in done_cards[1] %}
+          <li>
+            <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
+            <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
+              <input type = "hidden" name = card_id_form value = {{card.id}}>
+                <button type="submit">
+                Mark As Complete
+                </button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Add New Items</h2>
-      <form action="/add-item" method="POST">
+      <h2>Add New Cards</h2>
+      <form action="/add-card" method="POST">
         <ul class="list-group mb-4">
           <li>
             <label for ="title">Title : </label>
@@ -45,7 +116,7 @@
             <option value = "Done">Done</option>
           </select>
           <li class="button">
-            <button type="submit">Add new todo</button>
+            <button type="submit">Add new card</button>
           </li>
         </ul>  
       </form>

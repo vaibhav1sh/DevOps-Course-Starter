@@ -92,3 +92,8 @@ Production Image: (application is copied to image as well, hence no need to use 
 $ docker build --target production --tag todo-app:prod .
 $ docker run --env-file .env -p 5000:5000 todo-app:prod
 ```
+## Module 3
+Changes made during Module 3 exercise - 
+Nomenclature has been enhanced.  We now have objects of class TrelloCard instead of todos or items.
+Unit tests and Integration tests are present in tests folder
+E2E tests are present in tests_e2e folder

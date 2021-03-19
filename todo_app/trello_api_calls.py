@@ -1,25 +1,33 @@
 import os, requests
+import dateutil.parser
 
-class Item:
-    def __init__(self,title,id,status):
+class TrelloCard:
+    def __init__(self,title,id,status,updated_time):
         self.title = title
         self.status = status
         self.id = id
+        self.updated_time = \
+            (dateutil.parser.isoparse(updated_time)).replace(tzinfo = None)
 
     def create_card(title, list_category):
         list_id = get_list_id(list_category)
-        payload = {'key':os.environ.get('TRELLO_KEY'),'token':os.environ.get('TRELLO_TOKEN'), \
-        'idList':list_id}
+        payload = {
+            'key':os.environ.get('TRELLO_KEY'),
+            'token':os.environ.get('TRELLO_TOKEN'),
+            'idList':list_id
+            }
         url = api_prefix + '1/cards'
         card_title = {"name": title}
         api_response = requests.post(url, params=payload, data = card_title)
         api_response_list = api_response.json()
-        return Item(api_response_list["name"],api_response_list["id"], list_category)
+        return TrelloCard(api_response_list["name"], api_response_list["id"], \
+            list_category, api_response_list["dateLastActivity"])
 
 api_prefix = 'https://api.trello.com/'
 
 def call_api(api_suffix):
-    payload = {'fields':'name','key':os.environ.get('TRELLO_KEY'),'token':os.environ.get('TRELLO_TOKEN')}
+    payload = {'fields': ['name','dateLastActivity'],'key':os.environ.get('TRELLO_KEY'), \
+    'token':os.environ.get('TRELLO_TOKEN')}
     url = api_prefix + api_suffix
     api_response = requests.get(url, params=payload)
     try:
@@ -50,14 +58,14 @@ def get_list_id(list_category):
             list_id = x["id"]
     return list_id
 
-def fetch_all_items(*args): 
+def fetch_all_cards(*args): 
     all_cards_obj = []
     for arg in args:
         list_id = get_list_id(arg)
         api_suffix_get_lists = '1/lists/' + list_id + '/cards'
         all_cards = call_api(api_suffix_get_lists)
         for i, card in enumerate(all_cards):
-            all_cards[i] = Item(all_cards[i]["name"], all_cards[i]["id"], arg)
+            all_cards[i] = TrelloCard(all_cards[i]["name"], all_cards[i]["id"], arg, all_cards[i]["dateLastActivity"])
         all_cards_obj.extend(all_cards)
     return all_cards_obj
 
@@ -66,4 +74,23 @@ def change_card_status(card_id,to_state="Done"):
     list_id = get_list_id(to_state)
     url = api_prefix + '1/cards/' + card_id
     listdata = {"idList" : list_id}
-    api_response = requests.put(url,params=payload, data = listdata)
+    requests.put(url,params=payload, data = listdata)
+
+def create_trello_board():
+    payload = {
+        'key': os.environ.get('TRELLO_KEY'),
+        'token': os.environ.get('TRELLO_TOKEN'),
+        'name': os.environ.get('TRELLO_TEST_BOARD_NAME')
+    }
+    url = api_prefix + '1/boards/'
+    api_response = requests.post(url, params=payload)
+    api_response_list = api_response.json()
+    return api_response_list
+
+def delete_trello_board(board_id):
+    payload = {
+        'key': os.environ.get('TRELLO_KEY'),
+        'token': os.environ.get('TRELLO_TOKEN')
+    }
+    url = api_prefix + '1/boards/' + board_id
+    requests.delete(url, params=payload)
