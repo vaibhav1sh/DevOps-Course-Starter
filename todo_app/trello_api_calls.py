@@ -68,11 +68,12 @@ def change_card_status(card_id,to_state="Done"):
     listdata = {"idList" : list_id}
     requests.put(url,params=payload, data = listdata)
 
+# Written solely for the purpose of testing. 
 def create_trello_board():
     payload = {
         'key': os.environ.get('TRELLO_KEY'),
         'token': os.environ.get('TRELLO_TOKEN'),
-        'name': os.environ.get('TRELLO_TEST_BOARD_NAME')
+        'name': os.environ.get('TRELLO_BOARD_NAME_CREATE')
     }
     url = api_prefix + '1/boards/'
     api_response = requests.post(url, params=payload)
@@ -85,4 +86,5 @@ def delete_trello_board(board_id):
         'token': os.environ.get('TRELLO_TOKEN')
     }
     url = api_prefix + '1/boards/' + board_id
-    requests.delete(url, params=payload)
+    api_response = requests.delete(url, params=payload)
+    return api_response

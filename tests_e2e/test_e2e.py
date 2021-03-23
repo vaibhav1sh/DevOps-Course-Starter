@@ -11,7 +11,8 @@ from todo_app.app import create_app
 def test_app():
     result = create_trello_board()
     os.environ['TRELLO_BOARD_NAME'] = result["name"]
-
+    test_board_id = result["id"]
+    print('Name of created board', os.environ['TRELLO_BOARD_NAME'])
     application = create_app()
 
     thread = Thread(target=lambda : application.run(use_reloader=False))
@@ -19,7 +20,8 @@ def test_app():
     thread.start()
     yield application
     thread.join(1)
-    delete_trello_board(result["id"])
+    result = delete_trello_board(test_board_id)
+    print('Status code for delete request', result.status_code)
 
 
 @pytest.fixture(scope='module')
