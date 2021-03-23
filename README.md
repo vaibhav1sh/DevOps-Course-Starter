@@ -83,7 +83,7 @@ Development Image:
     
 ```bash
 $ docker build --target development --tag todo-app:dev .
-$ docker run --env-file .env -p 5100:5100 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
+$ docker run --env-file .env -p 5100:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/app/todo_app todo-app:dev
 ```
 
 Production Image: (application is copied to image as well, hence no need to use bind mount)
@@ -97,3 +97,9 @@ Changes made during Module 3 exercise -
 Nomenclature has been enhanced.  We now have objects of class TrelloCard instead of todos or items.
 Unit tests and Integration tests are present in tests folder
 E2E tests are present in tests_e2e folder
+
+## **Module-7**
+Docker - different env files
+$ docker run todo-app:test tests/test_viewmodel.py
+$ docker run --env-file .env todo-app:test tests/test_trello_api_calls.py
+$ docker run --env-file .env.test todo-app:test tests/test_app.py

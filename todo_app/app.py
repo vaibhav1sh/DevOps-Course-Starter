@@ -36,6 +36,10 @@ def create_app():
     
     return app
 
+wsgi_c = create_app()
+
 if __name__ == '__main__':
     #app.run()
-    create_app().run()
+    #create_app().run()
+    wsgi_c.run()
+

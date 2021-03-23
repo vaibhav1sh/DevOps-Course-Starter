@@ -11,7 +11,8 @@ from todo_app.app import create_app
 def test_app():
     result = create_trello_board()
     os.environ['TRELLO_BOARD_NAME'] = result["name"]
-
+    test_board_id = result["id"]
+    print('Name of created board', os.environ['TRELLO_BOARD_NAME'])
     application = create_app()
 
     thread = Thread(target=lambda : application.run(use_reloader=False))
@@ -19,17 +20,24 @@ def test_app():
     thread.start()
     yield application
     thread.join(1)
-    delete_trello_board(result["id"])
+    result = delete_trello_board(test_board_id)
+    print('Status code for delete request', result.status_code)
 
 
 @pytest.fixture(scope='module')
 def driver():
-    with webdriver.Firefox() as driver:
+    opts = webdriver.ChromeOptions()
+    opts.add_argument('--headless')
+    opts.add_argument('--no-sandbox')
+    opts.add_argument('--disable-dev-shm-usage')
+    with webdriver.Chrome('./chromedriver', options=opts) as driver:
         yield driver
+    # with webdriver.Firefox() as driver:
+    #     yield driver
 
-def test_task_journey(driver, test_app):
-    driver.get('http://localhost:5000/')
-    assert driver.title == 'To-Do App'
+# def test_task_journey(driver, test_app):
+#     driver.get('http://localhost:5000/')
+#     assert driver.title == 'To-Do App'
 
 def test_create_card(driver, test_app):
     driver.get('http://localhost:5000/')
