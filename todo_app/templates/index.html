@@ -18,7 +18,7 @@
             <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
             <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
               <input type = "hidden" name = card_id_form value = {{card.id}}>
-                <button type="submit">
+                <button type="submit" id= "To Do Button {{loop.index}}">
                 Mark As Complete
                 </button>
             </form>
@@ -34,7 +34,7 @@
             <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
             <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
               <input type = "hidden" name = card_id_form value = {{card.id}}>
-                <button type="submit">
+                <button type="submit" id= "Doing Button {{loop.index}}">
                 Mark As Complete
                 </button>
             </form>
@@ -51,12 +51,6 @@
         {% for card in done_cards[2] %}
           <li>
             <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
-            <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
-              <input type = "hidden" name = card_id_form value = {{card.id}}>
-                <button type="submit">
-                Mark As Complete
-                </button>
-            </form>
           </li>
         {% endfor %}
         </ul>
@@ -66,12 +60,6 @@
           {% for card in done_cards[3] %}
             <li>
               <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
-              <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
-                <input type = "hidden" name = card_id_form value = {{card.id}}>
-                  <button type="submit">
-                  Mark As Complete
-                  </button>
-              </form>
             </li>
           {% endfor %}
           </ul>
@@ -85,12 +73,6 @@
         {% for card in done_cards[1] %}
           <li>
             <b>Card # {{loop.index}}</b> : {{card.title}} - <i>{{card.status}}</i> 
-            <form action = "{{url_for('complete_item', id=loop.index)}}" method="POST">
-              <input type = "hidden" name = card_id_form value = {{card.id}}>
-                <button type="submit">
-                Mark As Complete
-                </button>
-            </form>
           </li>
         {% endfor %}
       </ul>
@@ -116,7 +98,7 @@
             <option value = "Done">Done</option>
           </select>
           <li class="button">
-            <button type="submit">Add new card</button>
+            <button type="submit" id= "Add new card">Add new card</button>
           </li>
         </ul>  
       </form>

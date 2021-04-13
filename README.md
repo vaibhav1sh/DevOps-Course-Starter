@@ -67,7 +67,19 @@ The other two variables store User Name (to fetch boards for given user) and Boa
 Visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.  
 
 ## Module 3
-Changes made during Module 3 exercise - 
-Nomenclature has been enhanced.  We now have objects of class TrelloCard instead of todos or items.
-Unit tests and Integration tests are present in tests folder
-E2E tests are present in tests_e2e folder
+
+### Key Dependencies
+The project uses pytest as testing framework. For end to end tests, Mozilla Firefox and Gecko Driver executable (which should be placed in the root of the project). 
+
+### Running the tests
+Unit and Integration tests are present in tests folder and can be executed through the following command 
+
+```bash
+$ poetry run pytest tests
+```
+
+The end to end tests are located in tests_e2e folder and can be executed using the following comand 
+
+```bash
+$ poetry run pytest tests_e2e
+```

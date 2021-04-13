@@ -68,4 +68,4 @@ def test_index_page(mock_get_requests, client):
     assert response.status_code == 200
     assert (b'To Do 3' in response.get_data()) == True
     assert (response.get_data().count(b'This is one of the tasks')) == 3
-    assert (response.get_data().count(b'Mark As Complete')) == 9
+    assert (response.get_data().count(b'Mark As Complete')) == 6
