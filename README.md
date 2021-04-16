@@ -103,6 +103,7 @@ Docker - different env files
 $ docker run todo-app:test tests/test_viewmodel.py
 $ docker run --env-file .env todo-app:test tests/test_trello_api_calls.py
 $ docker run --env-file .env.test todo-app:test tests/test_app.py
+$ docker run --env-file .env todo-app:test tests_e2e/test_e2e.py
 
 ### Key Dependencies
 The project uses pytest as testing framework. For end to end tests, Mozilla Firefox and Gecko Driver executable (which should be placed in the root of the project). 

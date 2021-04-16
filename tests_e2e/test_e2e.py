@@ -38,9 +38,9 @@ def driver():
     # with webdriver.Firefox() as driver:
     #     yield driver
 
-# def test_task_journey(driver, test_app):
-#     driver.get('http://localhost:5000/')
-#     assert driver.title == 'To-Do App'
+def test_task_journey(driver, test_app):
+    driver.get('http://localhost:5000/')
+    assert driver.title == 'To-Do App'
 
 def test_create_card(driver, test_app):
     driver.get('http://localhost:5000/')
