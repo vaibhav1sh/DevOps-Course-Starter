@@ -68,6 +68,7 @@ def change_card_status(card_id,to_state="Done"):
     listdata = {"idList" : list_id}
     requests.put(url,params=payload, data = listdata)
 
+# Written solely for the purpose of testing. 
 def create_trello_board():
     payload = {
         'key': os.environ.get('TRELLO_KEY'),

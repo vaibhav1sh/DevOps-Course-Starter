@@ -103,3 +103,19 @@ Docker - different env files
 $ docker run todo-app:test tests/test_viewmodel.py
 $ docker run --env-file .env todo-app:test tests/test_trello_api_calls.py
 $ docker run --env-file .env.test todo-app:test tests/test_app.py
+
+### Key Dependencies
+The project uses pytest as testing framework. For end to end tests, Mozilla Firefox and Gecko Driver executable (which should be placed in the root of the project). 
+
+### Running the tests
+Unit and Integration tests are present in tests folder and can be executed through the following command 
+
+```bash
+$ poetry run pytest tests
+```
+
+The end to end tests are located in tests_e2e folder and can be executed using the following comand 
+
+```bash
+$ poetry run pytest tests_e2e
+```

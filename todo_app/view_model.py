@@ -2,22 +2,13 @@ from datetime import datetime, timedelta, time
 
 # Decorator for get_cards function to slice result by time.
 def split_result_by_updated_time(func):
-    def wrapper_split_result_by_updated_time(self, list_category, \
-        from_threshold = None, to_threshold = None):
+    def wrapper_split_result_by_updated_time(self, list_category, 
+        from_threshold = datetime.min, to_threshold = datetime.max):
         intermediate_list = func(self,list_category)
         final_list = []
-        if from_threshold == None and to_threshold == None:
+        # Avoid iteration over a huge list, if not needed with this check
+        if from_threshold == datetime.min and to_threshold == datetime.max:
             final_list = intermediate_list 
-            return final_list
-        elif from_threshold != None and to_threshold == None:
-            for x in intermediate_list:
-                if x.updated_time >= from_threshold:
-                    final_list.append(x)
-            return final_list
-        elif from_threshold == None and to_threshold != None:
-            for x in intermediate_list:
-                if x.updated_time < to_threshold:
-                    final_list.append(x)
             return final_list
         else:
             for x in intermediate_list:

@@ -1,5 +1,6 @@
 import pytest, os
 from datetime import datetime
+from dotenv import load_dotenv, find_dotenv
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from threading import Thread
@@ -9,6 +10,8 @@ from todo_app.app import create_app
 
 @pytest.fixture(scope='module')
 def test_app():
+    file_path = find_dotenv('.env')
+    load_dotenv(file_path, override = True)
     result = create_trello_board()
     os.environ['TRELLO_BOARD_NAME'] = result["name"]
     test_board_id = result["id"]
@@ -46,17 +49,13 @@ def test_create_card(driver, test_app):
     input_category = driver.find_element_by_id("status")
     select = Select(input_category)
     select.select_by_visible_text('To Do')
-    button_to_click = driver.find_element_by_xpath(
-        "/html/body/div/div[3]/div/form/ul/li[3]/button"
-        )
+    button_to_click = driver.find_element_by_id("Add new card")
     button_to_click.click()
     assert (driver.page_source.find("Creating new card")) 
 
 def test_mark_card_complete(driver, test_app):
     driver.get('http://localhost:5000/')
-    button_to_click = driver.find_element_by_xpath(
-        "/html/body/div/div[2]/div/ul[1]/li[1]/form/button"
-        )
+    button_to_click = driver.find_element_by_id("To Do Button 1")
     button_to_click.click()
     one_done_card = fetch_all_cards("Done")
     assert len(one_done_card) == 1
