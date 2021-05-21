@@ -65,7 +65,25 @@ The other two variables store User Name (to fetch boards for given user) and Boa
 
 Visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.  
 
-## Running through VM
+
+## Module 3
+
+### Key Dependencies
+The project uses pytest as testing framework. For end to end tests, Mozilla Firefox and Gecko Driver executable (which should be placed in the root of the project). 
+
+### Running the tests
+Unit and Integration tests are present in tests folder and can be executed through the following command 
+
+```bash
+$ poetry run pytest tests
+```
+
+The end to end tests are located in tests_e2e folder and can be executed using the following comand 
+
+```bash
+$ poetry run pytest tests_e2e
+
+## Module 4 Running through VM
 During VM provisioning, all the dependencies are installed. Provisioning steps are documented in vagrantfile.
 
 Once VM is brought up (using the command $ vagrant up), visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
@@ -91,4 +109,5 @@ Production Image: (application is copied to image as well, hence no need to use 
 ```bash
 $ docker build --target production --tag todo-app:prod .
 $ docker run --env-file .env -p 5000:5000 todo-app:prod
+
 ```

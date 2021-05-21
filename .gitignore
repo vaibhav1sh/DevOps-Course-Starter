@@ -46,6 +46,10 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
+# Geckodriver 
+geckodriver.log
+geckodriver.exe
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
