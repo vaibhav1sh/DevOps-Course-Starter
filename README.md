@@ -66,7 +66,7 @@ The other two variables store User Name (to fetch boards for given user) and Boa
 Visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.  
 
 
-## Module 3
+## **Module 3**
 
 ### Key Dependencies
 The project uses pytest as testing framework. For end to end tests, Mozilla Firefox and Gecko Driver executable (which should be placed in the root of the project). 
@@ -82,8 +82,9 @@ The end to end tests are located in tests_e2e folder and can be executed using t
 
 ```bash
 $ poetry run pytest tests_e2e
+```
 
-## Module 4 Running through VM
+## **Module 4 Running through VM**
 During VM provisioning, all the dependencies are installed. Provisioning steps are documented in vagrantfile.
 
 Once VM is brought up (using the command $ vagrant up), visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
@@ -111,3 +112,9 @@ $ docker build --target production --tag todo-app:prod .
 $ docker run --env-file .env -p 5000:5000 todo-app:prod
 
 ```
+
+## **Module-6**
+
+The architecture diagrams can be found in documentation folder. This folder contains 3 .drawio files (one each for context, component, and container diagrams), and 4 html files which correspond to the drawio files.   
+
+The .drawio files can be edited through online tool available at https://app.diagrams.net/
