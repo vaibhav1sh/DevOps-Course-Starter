@@ -65,7 +65,26 @@ The other two variables store User Name (to fetch boards for given user) and Boa
 
 Visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.  
 
-## Running through VM
+
+## **Module 3**
+
+### Key Dependencies
+The project uses pytest as testing framework. For end to end tests, Mozilla Firefox and Gecko Driver executable (which should be placed in the root of the project). 
+
+### Running the tests
+Unit and Integration tests are present in tests folder and can be executed through the following command 
+
+```bash
+$ poetry run pytest tests
+```
+
+The end to end tests are located in tests_e2e folder and can be executed using the following comand 
+
+```bash
+$ poetry run pytest tests_e2e
+```
+
+## **Module 4 Running through VM**
 During VM provisioning, all the dependencies are installed. Provisioning steps are documented in vagrantfile.
 
 Once VM is brought up (using the command $ vagrant up), visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
@@ -108,15 +127,13 @@ $ docker run --env-file .env todo-app:test tests_e2e/test_e2e.py
 ### Key Dependencies
 The project uses pytest as testing framework. For end to end tests, Mozilla Firefox and Gecko Driver executable (which should be placed in the root of the project). 
 
-### Running the tests
-Unit and Integration tests are present in tests folder and can be executed through the following command 
-
-```bash
-$ poetry run pytest tests
 ```
 
-The end to end tests are located in tests_e2e folder and can be executed using the following comand 
+## **Module-6**
 
 ```bash
 $ poetry run pytest tests_e2e
 ```
+The architecture diagrams can be found in documentation folder. This folder contains 3 .drawio files (one each for context, component, and container diagrams), and 4 html files which correspond to the drawio files.   
+
+The .drawio files can be edited through online tool available at https://app.diagrams.net/
