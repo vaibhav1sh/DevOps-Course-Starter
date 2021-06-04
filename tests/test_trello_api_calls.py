@@ -8,8 +8,8 @@ from dotenv import load_dotenv, find_dotenv
 from todo_app.trello_api_calls import create_trello_board, delete_trello_board
 
 def test_create_delete_trello_board():
-    file_path = find_dotenv('.env')
-    load_dotenv(file_path, override = True)
+    # file_path = find_dotenv('.env')
+    # load_dotenv(file_path, override = True)
     result = create_trello_board()
     assert len(result) == 13
     test_board_id = result["id"]
