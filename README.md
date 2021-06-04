@@ -111,29 +111,20 @@ Production Image: (application is copied to image as well, hence no need to use 
 $ docker build --target production --tag todo-app:prod .
 $ docker run --env-file .env -p 5000:5000 todo-app:prod
 ```
-## Module 3
-Changes made during Module 3 exercise - 
-Nomenclature has been enhanced.  We now have objects of class TrelloCard instead of todos or items.
-Unit tests and Integration tests are present in tests folder
-E2E tests are present in tests_e2e folder
+
+## **Module-6**
+
+The architecture diagrams can be found in documentation folder. This folder contains 3 .drawio files (one each for context, component, and container diagrams), and 4 html files which correspond to the drawio files.   
+
+The .drawio files can be edited through online tool available at https://app.diagrams.net/
 
 ## **Module-7**
 Docker - different env files
+
+```bash
 $ docker run todo-app:test tests/test_viewmodel.py
 $ docker run --env-file .env todo-app:test tests/test_trello_api_calls.py
 $ docker run --env-file .env.test todo-app:test tests/test_app.py
 $ docker run --env-file .env todo-app:test tests_e2e/test_e2e.py
-
-### Key Dependencies
-The project uses pytest as testing framework. For end to end tests, Mozilla Firefox and Gecko Driver executable (which should be placed in the root of the project). 
-
 ```
 
-## **Module-6**
-
-```bash
-$ poetry run pytest tests_e2e
-```
-The architecture diagrams can be found in documentation folder. This folder contains 3 .drawio files (one each for context, component, and container diagrams), and 4 html files which correspond to the drawio files.   
-
-The .drawio files can be edited through online tool available at https://app.diagrams.net/
