@@ -5,7 +5,7 @@ script:
 - docker build --target test --tag todo-app:test .
 - docker run todo-app:test tests/test_viewmodel.py
 - docker run --env-file .env.test todo-app:test tests/test_app.py
-- docker run -env TRELLO_BOARD_NAME_CREATE=${TRELLO_BOARD_NAME_CREATE} todo-app:test tests/test_trello_api_calls.py
+- docker run --env TRELLO_BOARD_NAME_CREATE=${TRELLO_BOARD_NAME_CREATE} todo-app:test tests/test_trello_api_calls.py
 - docker run todo-app:test tests_e2e/test_e2e.py
 env:
   global:
