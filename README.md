@@ -119,12 +119,28 @@ The architecture diagrams can be found in documentation folder. This folder cont
 The .drawio files can be edited through online tool available at https://app.diagrams.net/
 
 ## **Module-7**
-Docker - different env files
+
+### Pre-requisites 
+Use following commands to create test image.
 
 ```bash
 $ docker run todo-app:test tests/test_viewmodel.py
+```
+Subsequently, the individual tests can be executed by providing appropriate env file through `--env-file` flag, or by providing individual variables through `--env` flag. Following commands use `--env-file` flag.
+
+```bash
 $ docker run --env-file .env todo-app:test tests/test_trello_api_calls.py
 $ docker run --env-file .env.test todo-app:test tests/test_app.py
 $ docker run --env-file .env todo-app:test tests_e2e/test_e2e.py
 ```
 
+### Running the build on travis
+
+Login to [Travis](https://www.travis-ci.com/) through Github credentials, and push commit to execute build on your branch. 
+- The test environment variables can either be passed through `--env-file` flag or `--env` flag. 
+- The production secrets should be encrypted before passing through `--env` flag. 
+- Travis CLI (used for encrypting production variables) would need a github token for authentication, it does not accept Github userid / password. 
+
+### To change the build settings
+- Updating the build frequency to ensure only pull requests are built - enable the 'Build pushed pull requests' flag under General settings. 
+- To enable auto cancelling builds - enable 'auto cancel branch builds' and 'Auto cancel pull request builds' under Auto Cancellation settings. 
