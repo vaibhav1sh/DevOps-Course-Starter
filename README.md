@@ -146,4 +146,7 @@ Login to [Travis](https://www.travis-ci.com/) through Github credentials, and pu
 - To enable auto cancelling builds - enable 'auto cancel branch builds' and 'Auto cancel pull request builds' under Auto Cancellation settings. 
 
 ## **Module-8**
-test
+Login to Heroku CLI
+Login to heroku container:login
+
+after pushing to heroku, i don't see it in my account
