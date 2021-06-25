@@ -1,7 +1,7 @@
 services:
 - docker
 script:
-- docker login --username vaibhav1s --password-stdin
+- echo "$DOCKER_PASSWORD" | docker login --username vaibhav1s --password-stdin
 - docker build --target development --tag todo-app-dev:dev .
 - docker build --target production --tag todo-app-prod:${TRAVIS_COMMIT} .
 - docker push vaibhav1s/todo-app-prod:${TRAVIS_COMMIT}
