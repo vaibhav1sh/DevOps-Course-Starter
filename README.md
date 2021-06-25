@@ -144,3 +144,5 @@ Login to [Travis](https://www.travis-ci.com/) through Github credentials, and pu
 ### To change the build settings
 - Updating the build frequency to ensure only pull requests are built - enable the 'Build pushed pull requests' flag under General settings. 
 - To enable auto cancelling builds - enable 'auto cancel branch builds' and 'Auto cancel pull request builds' under Auto Cancellation settings. 
+
+## **Module-8**
