@@ -124,7 +124,7 @@ The .drawio files can be edited through online tool available at https://app.dia
 Use following commands to create test image.
 
 ```bash
-$ docker run todo-app:test tests/test_viewmodel.py
+$ docker build --target test --tag todo-app:test .
 ```
 Subsequently, the individual tests can be executed by providing appropriate env file through `--env-file` flag, or by providing individual variables through `--env` flag. Following commands use `--env-file` flag.
 

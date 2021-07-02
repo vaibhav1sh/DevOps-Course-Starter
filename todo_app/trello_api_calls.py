@@ -76,8 +76,6 @@ def create_trello_board():
         'name': os.environ.get('TRELLO_BOARD_NAME_CREATE')
     }
     url = api_prefix + '1/boards/'
-    # TESTING
-    print('TRELLO BOARD NAME',os.environ.get('TRELLO_BOARD_NAME_CREATE'))
     api_response = requests.post(url, params=payload)
     api_response_list = api_response.json()
     return api_response_list

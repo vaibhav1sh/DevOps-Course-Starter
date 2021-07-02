@@ -1,15 +1,12 @@
 script:
-- echo "hello world"
-- docker build --target development --tag todo-app:dev .
-- docker build --target production --tag todo-app:prod .
 - docker build --target test --tag todo-app:test .
 - docker run todo-app:test tests/test_viewmodel.py
 - docker run --env-file .env.test todo-app:test tests/test_app.py
-- docker run --env TRELLO_BOARD_NAME_CREATE=E2E_test_board --env TRELLO_KEY=${TRELLO_KEY}
-  --env TRELLO_TOKEN=${TRELLO_TOKEN} todo-app:test tests/test_trello_api_calls.py
+- docker run --env TRELLO_BOARD_NAME_CREATE=E2E_test_board --env TRELLO_KEY
+  --env TRELLO_TOKEN todo-app:test tests/test_trello_api_calls.py
 - docker run --env TRELLO_BOARD_NAME_CREATE=E2E_test_board --env TRELLO_USER_NAME=vaibhavsharma206
-  --env TRELLO_BOARD_NAME=team_template --env TRELLO_KEY=${TRELLO_KEY} --env TRELLO_TOKEN=${TRELLO_TOKEN}
-  --env SECRET_KEY=${SECRET_KEY}
+  --env TRELLO_BOARD_NAME=team_template --env TRELLO_KEY --env TRELLO_TOKEN
+  --env SECRET_KEY
   todo-app:test tests_e2e/test_e2e.py
 env:
   global:
