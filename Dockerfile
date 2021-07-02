@@ -19,7 +19,7 @@ FROM base as production
 RUN pip install gunicorn
 COPY todo_app todo_app 
 EXPOSE 5000
-ENTRYPOINT [ "gunicorn","--bind","0.0.0.0$PORT","todo_app.app:wsgi_c"]
+ENTRYPOINT [ "gunicorn","--bind","0.0.0.0:${PORT}","todo_app.app:wsgi_c"]
 
 # DEV IMAGE
 FROM base as development
