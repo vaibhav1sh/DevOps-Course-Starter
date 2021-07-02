@@ -110,7 +110,6 @@ Production Image: (application is copied to image as well, hence no need to use 
 ```bash
 $ docker build --target production --tag todo-app:prod .
 $ docker run --env-file .env -p 5000:5000 todo-app:prod
-
 ```
 
 ## **Module-6**
@@ -118,3 +117,30 @@ $ docker run --env-file .env -p 5000:5000 todo-app:prod
 The architecture diagrams can be found in documentation folder. This folder contains 3 .drawio files (one each for context, component, and container diagrams), and 4 html files which correspond to the drawio files.   
 
 The .drawio files can be edited through online tool available at https://app.diagrams.net/
+
+## **Module-7**
+
+### Pre-requisites 
+Use following commands to create test image.
+
+```bash
+$ docker build --target test --tag todo-app:test .
+```
+Subsequently, the individual tests can be executed by providing appropriate env file through `--env-file` flag, or by providing individual variables through `--env` flag. Following commands use `--env-file` flag.
+
+```bash
+$ docker run --env-file .env todo-app:test tests/test_trello_api_calls.py
+$ docker run --env-file .env.test todo-app:test tests/test_app.py
+$ docker run --env-file .env todo-app:test tests_e2e/test_e2e.py
+```
+
+### Running the build on travis
+
+Login to [Travis](https://www.travis-ci.com/) through Github credentials, and push commit to execute build on your branch. 
+- The test environment variables can either be passed through `--env-file` flag or `--env` flag. 
+- The production secrets should be encrypted before passing through `--env` flag. 
+- Travis CLI (used for encrypting production variables) would need a github token for authentication, it does not accept Github userid / password. 
+
+### To change the build settings
+- Updating the build frequency to ensure only pull requests are built - enable the 'Build pushed pull requests' flag under General settings. 
+- To enable auto cancelling builds - enable 'auto cancel branch builds' and 'Auto cancel pull request builds' under Auto Cancellation settings. 

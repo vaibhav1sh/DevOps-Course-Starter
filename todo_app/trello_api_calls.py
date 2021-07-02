@@ -29,7 +29,7 @@ def call_api(api_suffix):
     payload = {'fields': ['name','dateLastActivity'],'key':os.environ.get('TRELLO_KEY'), \
     'token':os.environ.get('TRELLO_TOKEN')}
     url = api_prefix + api_suffix
-    api_response = requests.get(url, params=payload)
+    api_response = requests.get(url, params=payload)    
     api_response_list = api_response.json()
     return api_response_list
 
