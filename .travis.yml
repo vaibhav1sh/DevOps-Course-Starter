@@ -8,11 +8,11 @@ script:
 - docker build --target test --tag vaibhav1s/todo-app-test:${TRAVIS_COMMIT} .
 - docker run vaibhav1s/todo-app-test:${TRAVIS_COMMIT} tests/test_viewmodel.py
 - docker run --env-file .env.test vaibhav1s/todo-app-test:${TRAVIS_COMMIT} tests/test_app.py
-- docker run --env TRELLO_BOARD_NAME_CREATE=E2E_test_board --env TRELLO_KEY=${TRELLO_KEY}
-  --env TRELLO_TOKEN=${TRELLO_TOKEN} vaibhav1s/todo-app-test:${TRAVIS_COMMIT} tests/test_trello_api_calls.py
+- docker run --env TRELLO_BOARD_NAME_CREATE=E2E_test_board --env TRELLO_KEY
+  --env TRELLO_TOKEN vaibhav1s/todo-app-test:${TRAVIS_COMMIT} tests/test_trello_api_calls.py
 - docker run --env TRELLO_BOARD_NAME_CREATE=E2E_test_board --env TRELLO_USER_NAME=vaibhavsharma206
-  --env TRELLO_BOARD_NAME=team_template --env TRELLO_KEY=${TRELLO_KEY} --env TRELLO_TOKEN=${TRELLO_TOKEN}
-  --env SECRET_KEY=${SECRET_KEY}
+  --env TRELLO_BOARD_NAME=team_template --env TRELLO_KEY --env TRELLO_TOKEN
+  --env SECRET_KEY
   vaibhav1s/todo-app-test:${TRAVIS_COMMIT} tests_e2e/test_e2e.py
 env:
   global:
