@@ -16,6 +16,7 @@ after_success:
 - echo "$DOCKER_PASSWORD" | docker login --username vaibhav1s --password-stdin
 - docker push vaibhav1s/todo-app-prod:${TRAVIS_COMMIT}
 - docker tag vaibhav1s/todo-app-prod:${TRAVIS_COMMIT} registry.heroku.com/todo-app-devops/web
+- docker login --username=_ --password=$(heroku auth:token) registry.heroku.com
 - docker push registry.heroku.com/todo-app-devops/web
 - heroku container:release web | heroku open
 env:
