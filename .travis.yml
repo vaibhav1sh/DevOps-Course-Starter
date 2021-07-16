@@ -1,10 +1,7 @@
 services:
 - docker
 script:
-- echo "$DOCKER_PASSWORD" | docker login --username vaibhav1s --password-stdin
 - docker build --target development --tag vaibhav1s/todo-app-dev:${TRAVIS_COMMIT} .
-- docker build --target production --tag vaibhav1s/todo-app-prod:${TRAVIS_COMMIT} .
-- docker push vaibhav1s/todo-app-prod:${TRAVIS_COMMIT}
 - docker build --target test --tag vaibhav1s/todo-app-test:${TRAVIS_COMMIT} .
 - docker run vaibhav1s/todo-app-test:${TRAVIS_COMMIT} tests/test_viewmodel.py
 - docker run --env-file .env.test vaibhav1s/todo-app-test:${TRAVIS_COMMIT} tests/test_app.py
@@ -14,6 +11,13 @@ script:
   --env TRELLO_BOARD_NAME=team_template --env TRELLO_KEY --env TRELLO_TOKEN
   --env SECRET_KEY
   vaibhav1s/todo-app-test:${TRAVIS_COMMIT} tests_e2e/test_e2e.py
+after_success: 
+- docker build --target production --tag vaibhav1s/todo-app-prod:${TRAVIS_COMMIT} .
+- echo "$DOCKER_PASSWORD" | docker login --username vaibhav1s --password-stdin
+- docker push vaibhav1s/todo-app-prod:${TRAVIS_COMMIT}
+- docker tag vaibhav1s/todo-app-prod:${TRAVIS_COMMIT} registry.heroku.com/todo-app-devops/web
+- docker push registry.heroku.com/todo-app-devops/web
+- heroku container:release web | heroku open
 env:
   global:
   - secure: Xbxyvf+7KEM1g933Dljkr8T2V0nZ5nT5xfHvTK4ECt5KZ7TRWxbo22MgByqh/QPunutsgclo5EXOPaq47KykgkhdibcMf9K9LVxHnpFqgylRf07nWoyzN/aY1CbOk1jv+SwwAmqxDSYXdobB8jodsf2t7mFllimyMIP9/cv4QFJ6xsWJehhyH/RBF64RlWaSo5hiq3l3Yt9zv4y1Ar2c03HOB7bDv5W6wzFQmwMSorLGlqJbn+7jSzGhaTs0TmcnDi3jFdw9fk6EZWwyJHxechMvHpd9i3gGM6Z8JbDv+Zp6rA8zqngUwNNqySaNWK6hdghyLx6kXU3FN6BlQ2DOlnNrw+sKwnsYUfY5SdOcJSFcm/KPStFPmSA/BBWiTMraa05JxP4x8XFWBqzvEHRw5gK7q9v+/FIfePe1YExCBuWtlKaKelkRfaaxwHBwrKB7g+fTmqs7P4JOCBrDy/IY2h0onfubwe/5XoV3GdRvsqCQ0VYmq3lsPvQalEzvgFvkGypdNeuAPJYBMO+pzjmhtei9cltZpIjH8ewqhi1fMVX+6E2W545Scl7U7AMbsjaDHrV6JOixTecxgtCGnBL/qDnw4RHjrODQSBnrasLCOvvuCuDmEe4VZQoKzSRJoxG67BnLXiPEmA1K7HJYi0+vVElr6494gEWfS6VJWeSkn1I=

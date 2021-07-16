@@ -146,7 +146,17 @@ Login to [Travis](https://www.travis-ci.com/) through Github credentials, and pu
 - To enable auto cancelling builds - enable 'auto cancel branch builds' and 'Auto cancel pull request builds' under Auto Cancellation settings. 
 
 ## **Module-8**
+
+### Pre-requisites 
+The production image needs to be pushed to docker hub for subsequent deployement to Heroku. Following commands can be used for docker authentication and image push, respectively. 
+
+```bash
+- echo "$DOCKER_PASSWORD" | docker login --username vaibhav1s --password-stdin
+- docker build --target development --tag vaibhav1s/todo-app-dev:${TRAVIS_COMMIT} .
+- docker build --target production --tag vaibhav1s/todo-app-prod:${TRAVIS_COMMIT} .
+```
 Login to Heroku CLI
 Login to heroku container:login
 
 after pushing to heroku, i don't see it in my account
+Can't  use entrypoint. Had to change to CMD.
