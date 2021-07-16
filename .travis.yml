@@ -18,6 +18,7 @@ after_success:
 - docker tag vaibhav1s/todo-app-prod:${TRAVIS_COMMIT} registry.heroku.com/todo-app-devops/web
 - docker login --username=_ --password=${HEROKU_AUTH_TOKEN} registry.heroku.com
 - docker push registry.heroku.com/todo-app-devops/web
+- heroku container:login
 - heroku container:release web --app todo-app-devops
 - heroku open
 env:
